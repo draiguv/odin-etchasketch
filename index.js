@@ -5,9 +5,12 @@ const container = document.querySelector('.container');
 const newBtn = document.querySelector('.new');
 const singleBtn = document.querySelector('.single');
 const rainbowBtn = document.querySelector('.rainbow');
+const enableBtn = document.querySelector('.enable');
+const disableBtn = document.querySelector('.disable');
 
 let userGridSize;
 let isRainbow = false;
+let isOpaque = false;
 
 function createGrids() {
   container.innerHTML = ''; // clears grids
@@ -50,6 +53,10 @@ function divListener() {
 
 function fillColor(e) {
   e.target.style.backgroundColor = isRainbow ? generateRandomColor() : DEFAULT_COLOR;
+  
+  if (isOpaque) {
+    e.target.style.opacity = e.target.style.opacity == '' ? '10%' : parseFloat(e.target.style.opacity) + (10 / 100);
+  }
 }
 
 function generateRandomColor() {
@@ -59,3 +66,5 @@ function generateRandomColor() {
 newBtn.addEventListener('click', createGrids);
 singleBtn.addEventListener('click', () => isRainbow = false);
 rainbowBtn.addEventListener('click', () => isRainbow = true);
+enableBtn.addEventListener('click', () => isOpaque = true);
+disableBtn.addEventListener('click', () => isOpaque = false);
